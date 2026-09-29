@@ -375,7 +375,25 @@ The recommended testing flow is provided below.
 
 This section is intended to let a reviewer validate the main functionality without needing to inspect the source code first.
 
-## Step 1 — Create a normal user
+### Step 1.1 - Creating a Staff User
+
+Staff privileges are required for creating/updating/deleting diagnostic
+centres and tests.
+
+After starting Docker:
+
+docker compose exec backend python manage.py createsuperuser
+
+Enter the requested email and password.
+
+Then:
+1. Login through POST /api/auth/login/
+2. Copy the access token.
+3. Click Authorize in Swagger.
+4. Enter: Bearer <access_token>
+5. Staff-only diagnostic endpoints can now be tested.
+
+## Step 1.2 — Create a normal user
 
 **POST `/api/auth/signup/`**
 
